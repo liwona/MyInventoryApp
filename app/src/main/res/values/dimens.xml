@@ -5,6 +5,6 @@
     <dimen name="fab_margin">16dp</dimen>
 
     <!-- Margin for ListView-->
-    <dimen name="list_view_margin">16dp</dimen>
+    <dimen name="layout_margin">16dp</dimen>
 
 </resources>

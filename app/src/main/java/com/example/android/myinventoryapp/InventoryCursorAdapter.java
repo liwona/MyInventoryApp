@@ -59,7 +59,7 @@ public class InventoryCursorAdapter extends CursorAdapter {
         TextView quantityTextView = view.findViewById(R.id.quantity);
 
         // Find the columns of the book attributes that we're interested in
-        int nameColumnIndex = cursor.getColumnIndex(InventoryEntry.COLUMN_BOOK_NAME);
+        int nameColumnIndex = cursor.getColumnIndex(InventoryEntry.COLUMN_BOOK_TITLE);
         int priceColumnIndex = cursor.getColumnIndex(InventoryEntry.COLUMN_BOOK_PRICE);
         int quantityColumnIndex = cursor.getColumnIndex(InventoryEntry.COLUMN_BOOK_QUANTITY);
 

@@ -36,4 +36,27 @@
 
     <!-- Dialog button text for the option to cancel deletion of the current book [CHAR LIMIT=20] -->
     <string name="cancel">Cancel</string>
+
+    <!-- Title for the activity to add a new book [CHAR LIMIT=20] -->
+    <string name="edit_activity_title_new_book">Add Book</string>
+
+    <!-- Title for the activity to edit a pet [CHAR LIMIT=20] -->
+    <string name="edit_activity_title_edit_book">Edit Book</string>
+
+    <!-- Text hint for title in the edit activity [CHAR LIMIT=30] -->
+    <string name="hint_book_title">Title</string>
+
+    <!-- Text hint for price in the edit activity [CHAR LIMIT=30] -->
+    <string name="hint_book_price">Price</string>
+
+    <!-- Text hint for quantity in the edit activity [CHAR LIMIT=30] -->
+    <string name="hint_book_quantity">Quantity</string>
+
+    <!-- Text hint for Supplier Name in the edit activity [CHAR LIMIT=30] -->
+    <string name="hint_supplier_name">Supplier\'s Name</string>
+
+    <!-- Text hint for price in the edit activity [CHAR LIMIT=30] -->
+    <string name="hint_supplier_number">Supplier\'s Phone Number</string>
+    <string name="overview">Book\'s details</string>
+    <string name="currency">$</string>
 </resources>

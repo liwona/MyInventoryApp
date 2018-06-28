@@ -65,7 +65,7 @@ public class InventoryContract {
          *
          * Type: TEXT
          */
-        public static final String COLUMN_BOOK_NAME = "product_name";
+        public static final String COLUMN_BOOK_TITLE = "book_title";
 
         /**
          * Price of the book.

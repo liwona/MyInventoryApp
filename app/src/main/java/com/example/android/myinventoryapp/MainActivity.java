@@ -39,7 +39,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, EditFragment.class);
+                Intent intent = new Intent(MainActivity.this, EditActivity.class);
                 startActivity(intent);
             }
         });
@@ -112,7 +112,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         // Create a ContentValues object where column names are the keys,
         // and dummy's book attributes are the values.
         ContentValues values = new ContentValues();
-        values.put(InventoryEntry.COLUMN_BOOK_NAME, "Notebook");
+        values.put(InventoryEntry.COLUMN_BOOK_TITLE, "Notebook");
         values.put(InventoryEntry.COLUMN_BOOK_PRICE, "10");
         values.put(InventoryEntry.COLUMN_BOOK_QUANTITY, "3");
         values.put(InventoryEntry.COLUMN_BOOK_SUPPLIER_NAME, "Twoja Książka");
@@ -157,9 +157,9 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
     }
 
     private void deleteAllBooks() {
-        int rowsDeleted = getContentResolver().delete(InventoryEntry.CONTENT_URI, null,
-                null);
-        Log.v("MainActivity", rowsDeleted + " rows deleted from book database");
+//        int rowsDeleted = getContentResolver().delete(InventoryEntry.CONTENT_URI, null,
+//                null);
+//        Log.v("MainActivity", rowsDeleted + " rows deleted from book database");
     }
 
     @Override
@@ -167,7 +167,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         // Define a projection that specifies the columns from the table we care about
         String[] projection = {
                 InventoryEntry._ID,
-                InventoryEntry.COLUMN_BOOK_NAME,
+                InventoryEntry.COLUMN_BOOK_TITLE,
                 InventoryEntry.COLUMN_BOOK_PRICE,
                 InventoryEntry.COLUMN_BOOK_QUANTITY
         };

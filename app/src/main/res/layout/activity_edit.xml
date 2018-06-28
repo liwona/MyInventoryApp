@@ -1,6 +1,74 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    <!-- Layout for the editor -->
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="@dimen/layout_margin"
+        tools:context=".EditActivity">
 
-</android.support.constraint.ConstraintLayout>
+        <!-- Label -->
+        <TextView
+            android:id="@+id/title_edit_fragment"
+            style="@style/CategoryStyle"
+            android:text="@string/overview" />
+
+        <!-- Input fields -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/title_edit_fragment"
+            android:orientation="vertical"
+            android:paddingLeft="4dp">
+
+            <!-- Title -->
+            <EditText
+                android:id="@+id/edit_book_title"
+                style="@style/EditStyle"
+                android:hint="@string/hint_book_title"
+                android:inputType="textCapWords" />
+
+            <!-- Price fields -->
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="4dp">
+
+                <!-- Price -->
+                <EditText
+                    android:id="@+id/edit_pet_weight"
+                    style="@style/EditStyle"
+                    android:hint="@string/hint_book_price"
+                    android:inputType="number" />
+
+                <!-- Currency -->
+                <TextView
+                    android:id="@+id/label_price_currency"
+                    style="@style/EditCurrency"
+                    android:text="@string/currency" />
+            </RelativeLayout>
+
+            <!-- Quantity -->
+            <EditText
+                android:id="@+id/edit_book_quantity"
+                style="@style/EditStyle"
+                android:hint="@string/hint_book_quantity"
+                android:inputType="number" />
+
+            <!-- Supplier Name-->
+            <EditText
+                android:id="@+id/edit_supplier_name"
+                style="@style/EditStyle"
+                android:hint="@string/hint_supplier_name"
+                android:inputType="textCapWords" />
+
+            <!-- Supplier Phone Number -->
+            <EditText
+                android:id="@+id/edit_supplier_number"
+                style="@style/EditStyle"
+                android:hint="@string/hint_supplier_number"
+                android:inputType="number" />
+        </LinearLayout>
+    </RelativeLayout>
+
+

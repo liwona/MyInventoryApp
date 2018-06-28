@@ -8,7 +8,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:padding="@dimen/list_view_margin">
+        android:padding="@dimen/layout_margin">
 
         <TextView
             android:id="@+id/name"
@@ -33,7 +33,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:padding="@dimen/list_view_margin"
+        android:padding="@dimen/layout_margin"
         android:gravity="center_horizontal">
 
         <Button

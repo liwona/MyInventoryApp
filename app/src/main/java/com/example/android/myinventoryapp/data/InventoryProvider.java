@@ -125,7 +125,7 @@ public class InventoryProvider extends ContentProvider {
     private Uri insertBook(Uri uri, ContentValues values) {
 
         // Check that the name is not null
-        String name = values.getAsString(InventoryEntry.COLUMN_BOOK_NAME);
+        String name = values.getAsString(InventoryEntry.COLUMN_BOOK_TITLE);
         if (TextUtils.isEmpty(name)) {
             Toast.makeText(getContext(), getContext().getResources().getString(R.string.name_required), Toast.LENGTH_SHORT).show();
 //            throw new IllegalArgumentException("Book requires a name");
