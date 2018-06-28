@@ -3,4 +3,10 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <!--Toast message that name is required -->
+    <string name="name_required">Book requires a name</string>string>
+
+    <!--Toast message that name is required -->
+    <string name="price_required">Book requires a price</string>string>
 </resources>
