@@ -1,17 +1,12 @@
 package com.example.android.myinventoryapp;
 
-import android.app.Activity;
-import android.content.ContentUris;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
-
-import com.example.android.myinventoryapp.data.InventoryContract.InventoryEntry;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -56,10 +51,10 @@ public class MainActivity extends AppCompatActivity {
                 // {@link InventoryEntry#CONTENT_URI}.
                 // For example, the URI would be "content://com.example.android.books/books/2"
                 // if the book with ID 2 was clicked on.
-                Uri currentBookUri = ContentUris.withAppendedId(InventoryEntry.CONTENT_URI, id);
-
-                // Set the URI on the data field of the intent
-                intent.setData(currentBookUri);
+//                Uri currentBookUri = ContentUris.withAppendedId(InventoryEntry.CONTENT_URI, id);
+//
+//                // Set the URI on the data field of the intent
+//                intent.setData(currentBookUri);
 
                 // Launch the {@link EditorActivity} to display the data for the current pet.
                 startActivity(intent);
