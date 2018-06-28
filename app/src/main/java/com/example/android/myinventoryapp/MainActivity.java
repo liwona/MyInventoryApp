@@ -1,12 +1,21 @@
 package com.example.android.myinventoryapp;
 
+import android.app.AlertDialog;
+import android.content.ContentValues;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+
+import com.example.android.myinventoryapp.data.InventoryContract.InventoryEntry;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -64,5 +73,85 @@ public class MainActivity extends AppCompatActivity {
 //        // Kick off the loader
 //        getLoaderManager().initLoader(PET_LOADER, null, this);
 
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu options from the res/menu/menu_catalog.xml file.
+        // This adds menu items to the app bar.
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // User clicked on a menu option in the app bar overflow menu
+        switch (item.getItemId()) {
+            case R.id.insert_new_book:
+                // Do nothing for now
+                return true;
+            // Respond to a click on the "Insert dummy book" menu option
+            case R.id.insert_dummy_book:
+                // Inserting Dummy Book
+                insertDummyBook();
+                return true;
+            // Respond to a click on the "Delete all books" menu option
+            case R.id.delete_all_books:
+                // Do nothing for now
+                showDeleteConfirmationDialog();
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    private void insertDummyBook() {
+        // Create a ContentValues object where column names are the keys,
+        // and dummy's book attributes are the values.
+        ContentValues values = new ContentValues();
+        values.put(InventoryEntry.COLUMN_BOOK_NAME, "Notebook");
+        values.put(InventoryEntry.COLUMN_BOOK_PRICE, "10");
+        values.put(InventoryEntry.COLUMN_BOOK_QUANTITY, "3");
+        values.put(InventoryEntry.COLUMN_BOOK_SUPPLIER_NAME, "Twoja Książka");
+        values.put(InventoryEntry.COLUMN_BOOK_SUPPLIER_PHONE, "123456789");
+
+        // Insert a new row for Toto in the database, returning the ID of that new row.
+        // The first argument for db.insert() is the pets table name.
+        // The second argument provides the name of a column in which the framework
+        // can insert NULL in the event that the ContentValues is empty (if
+        // this is set to "null", then the framework will not insert a row when
+        // there are no values).
+        // The third argument is the ContentValues object containing the info for Toto.
+        Uri newUri = getContentResolver().insert(InventoryEntry.CONTENT_URI, values);
+
+        Log.v("MainActivity", "New row ID " + newUri);
+    }
+
+    private void showDeleteConfirmationDialog() {
+        // Create an AlertDialog.Builder and set the message, and click listeners
+        // for the postivie and negative buttons on the dialog.
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage(R.string.delete_dialog_msg);
+        builder.setPositiveButton(R.string.delete, new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+                // User clicked the "Delete" button, so delete the pet.
+                deleteAllBooks();
+            }
+        });
+        builder.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+                // User clicked the "Cancel" button, so dismiss the dialog
+                // and continue editing the pet.
+                if (dialog != null) {
+                    dialog.dismiss();
+                }
+            }
+        });
+
+        // Create and show the AlertDialog
+        AlertDialog alertDialog = builder.create();
+        alertDialog.show();
+    }
+
+    private void deleteAllBooks() {
     }
 }

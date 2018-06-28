@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".CatalogActivity">
+
+    <item
+        android:id="@+id/insert_new_book"
+        android:title="@string/insert_new_book"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/insert_dummy_book"
+        android:title="@string/insert_dummy_book"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/delete_all_books"
+        android:title="@string/delete_all_books"
+        app:showAsAction="never" />
+</menu>

@@ -17,5 +17,23 @@
     <string name="supplier_name_required">Supplier name is required</string>string>
 
     <!--Toast message that supplier phone number is required -->
-    <string name="supplier_phone_required">Supplier phone number is required</string>string>
+    <string name="supplier_phone_required">Supplier phone number is required</string>
+
+    <!--Menu Option 1 -->
+    <string name="insert_dummy_book">Add Dummy Product</string>
+
+    <!--Menu Option 2 -->
+    <string name="delete_all_books">Delete All Books</string>
+
+    <!--Menu Option 3 -->
+    <string name="insert_new_book">Add New Book</string>
+
+    <!-- Dialog message to ask the user to confirm deleting the current book [CHAR LIMIT=NONE] -->
+    <string name="delete_dialog_msg">Delete this pet?</string>
+
+    <!-- Dialog button text for the option to confirm deleting the current book [CHAR LIMIT=20] -->
+    <string name="delete">Delete</string>
+
+    <!-- Dialog button text for the option to cancel deletion of the current book [CHAR LIMIT=20] -->
+    <string name="cancel">Cancel</string>
 </resources>

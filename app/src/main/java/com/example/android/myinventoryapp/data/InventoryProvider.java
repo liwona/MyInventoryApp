@@ -148,12 +148,12 @@ public class InventoryProvider extends ContentProvider {
         }
 
 
-        // Check that the quantity is provided and greater than or equal to 0
-        Integer supplier_phone_number = values.getAsInteger(InventoryEntry.COLUMN_BOOK_SUPPLIER_PHONE);
-        if (supplier_phone_number != null && supplier_phone_number > 999999) {
-            Toast.makeText(getContext(), getContext().getResources().getString(R.string.supplier_phone_required), Toast.LENGTH_SHORT).show();
-//            throw new IllegalArgumentException("Book requires a quantity");
-        }
+//        // Check that the quantity is provided and greater than or equal to 0
+//        Integer supplier_phone_number = values.getAsInteger(InventoryEntry.COLUMN_BOOK_SUPPLIER_PHONE);
+//        if (supplier_phone_number != null && supplier_phone_number > 999999) {
+//            Toast.makeText(getContext(), getContext().getResources().getString(R.string.supplier_phone_required), Toast.LENGTH_SHORT).show();
+////            throw new IllegalArgumentException("Book requires a quantity");
+//        }
 
         // No need to check the breed, any value is valid (including null).
 
