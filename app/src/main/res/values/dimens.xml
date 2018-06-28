@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Margin around the floating action button in MainActivity -->
+    <dimen name="fab_margin">16dp</dimen>
+
+    <!-- Margin for ListView-->
+    <dimen name="list_view_margin">16dp</dimen>
+
+</resources>
