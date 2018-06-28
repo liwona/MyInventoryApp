@@ -7,6 +7,15 @@
     <!--Toast message that name is required -->
     <string name="name_required">Book requires a name</string>string>
 
-    <!--Toast message that name is required -->
+    <!--Toast message that price is required -->
     <string name="price_required">Book requires a price</string>string>
+
+    <!--Toast message that quantity is required -->
+    <string name="quantity_required">Book requires a quantity</string>string>
+
+    <!--Toast message that supplier name is required -->
+    <string name="supplier_name_required">Supplier name is required</string>string>
+
+    <!--Toast message that supplier phone number is required -->
+    <string name="supplier_phone_required">Supplier phone number is required</string>string>
 </resources>

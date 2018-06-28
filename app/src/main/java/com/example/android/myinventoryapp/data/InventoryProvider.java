@@ -13,8 +13,6 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.widget.Toast;
 
-import com.example.android.myinventoryapp.EditFragment;
-import com.example.android.myinventoryapp.MainActivity;
 import com.example.android.myinventoryapp.R;
 import com.example.android.myinventoryapp.data.InventoryContract.InventoryEntry;
 
@@ -131,29 +129,29 @@ public class InventoryProvider extends ContentProvider {
         // Check that the name is not null
         String name = values.getAsString(InventoryEntry.COLUMN_BOOK_NAME);
         if (TextUtils.isEmpty(name)) {
-            Toast.makeText(getContext(), getString(R.string.name_required), Toast.LENGTH_SHORT).show();
+            Toast.makeText(getContext(), getContext().getResources().getString(R.string.name_required), Toast.LENGTH_SHORT).show();
 //            throw new IllegalArgumentException("Book requires a name");
         }
 
         // Check that the price is provided and greater than 0
         Integer price = values.getAsInteger(InventoryEntry.COLUMN_BOOK_PRICE);
         if (price == null && price < 0) {
-            Toast.makeText(getContext(), "Book requires a price", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getContext(), getContext().getResources().getString(R.string.price_required), Toast.LENGTH_SHORT).show();
 //            throw new IllegalArgumentException("Book requires a price");
         }
 
         // Check that the quantity is provided and greater than or equal to 0
         Integer quantity = values.getAsInteger(InventoryEntry.COLUMN_BOOK_QUANTITY);
         if (quantity != null && quantity <= 0) {
-            Toast.makeText(getContext(), "Book requires a quantity", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getContext(), getContext().getResources().getString(R.string.quantity_required), Toast.LENGTH_SHORT).show();
 //            throw new IllegalArgumentException("Book requires a quantity");
         }
 
 
         // Check that the quantity is provided and greater than or equal to 0
         Integer supplier_phone_number = values.getAsInteger(InventoryEntry.COLUMN_BOOK_SUPPLIER_PHONE);
-        if (supplier_phone_number != null && supplier_phone_number > ) {
-            Toast.makeText(getContext(), "Book requires a quantity", Toast.LENGTH_SHORT).show();
+        if (supplier_phone_number != null && supplier_phone_number > 999999) {
+            Toast.makeText(getContext(), getContext().getResources().getString(R.string.supplier_phone_required), Toast.LENGTH_SHORT).show();
 //            throw new IllegalArgumentException("Book requires a quantity");
         }
 
@@ -164,7 +162,7 @@ public class InventoryProvider extends ContentProvider {
         SQLiteDatabase database = mDbHelper.getWritableDatabase();
 
         // Insert the new pet with the given values
-        long id = database.insert(PetEntry.TABLE_NAME, null, values);
+        long id = database.insert(InventoryEntry.TABLE_NAME, null, values);
 
         // If the ID is -1, then the insertion failed. Log an error and return null.
         if (id == -1) {
