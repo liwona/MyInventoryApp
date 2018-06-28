@@ -6,6 +6,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ListView;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -38,6 +39,9 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        // Find the ListView which will be populated with the pet data
+        ListView inventoryListView = (ListView) findViewById(R.id.inventory_list_view);
 
 
 
