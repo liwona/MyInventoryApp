@@ -158,9 +158,9 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
     }
 
     private void deleteAllBooks() {
-//        int rowsDeleted = getContentResolver().delete(InventoryEntry.CONTENT_URI, null,
-//                null);
-//        Log.v("MainActivity", rowsDeleted + " rows deleted from book database");
+        int rowsDeleted = getContentResolver().delete(InventoryEntry.CONTENT_URI, null,
+                null);
+        Log.v("MainActivity", rowsDeleted + " rows deleted from book database");
     }
 
     @Override
