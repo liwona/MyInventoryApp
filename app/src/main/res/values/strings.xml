@@ -85,4 +85,7 @@
 
     <!-- Toast message in editor when current pet has failed to be deleted [CHAR LIMIT=NONE] -->
     <string name="edit_delete_failed">Error with deleting the book</string>
+
+    <!-- Button to Order-->
+    <string name="order_button">Order</string>
 </resources>

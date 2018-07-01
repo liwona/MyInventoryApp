@@ -43,6 +43,7 @@
             android:textAppearance="?android:textAppearanceSmall"
             android:textColor="#2B3D4D"
             android:text="-"
+            android:onClick="decrement"
             android:focusable="false"
             android:focusableInTouchMode="false"/>
 

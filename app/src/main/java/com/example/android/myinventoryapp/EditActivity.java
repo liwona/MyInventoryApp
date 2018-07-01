@@ -1,5 +1,6 @@
 package com.example.android.myinventoryapp;
 
+import android.Manifest;
 import android.app.AlertDialog;
 import android.app.LoaderManager;
 import android.content.ContentValues;
@@ -7,9 +8,11 @@ import android.content.CursorLoader;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.Loader;
+import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.NavUtils;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
@@ -17,6 +20,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -38,6 +42,12 @@ public class EditActivity extends AppCompatActivity implements LoaderManager.Loa
 
     /** EditText field to enter the supplier's phone number*/
     private EditText mSupplierPhoneNumberNameEditText;
+
+    /** Button to order book from Supplier*/
+    private Button mOrderBook;
+
+    /** String which contains Supplier Phone Number*/
+    private String supplierPhoneString;
 
     /** Content URI for the existing book (null if it's a new book) */
     private Uri mCurrentBookUri;
@@ -101,8 +111,15 @@ public class EditActivity extends AppCompatActivity implements LoaderManager.Loa
         mPriceEditText.setOnTouchListener(mTouchListener);
         mQuantityEditText.setOnTouchListener(mTouchListener);
         mSupplierNameEditText.setOnTouchListener(mTouchListener);
-    }
 
+        mOrderBook = findViewById(R.id.order_button);
+        mOrderBook.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                intentCall();
+            }
+        });
+    }
 
     @Override
     public Loader<Cursor> onCreateLoader(int id, Bundle args) {
@@ -240,7 +257,7 @@ public class EditActivity extends AppCompatActivity implements LoaderManager.Loa
         String priceString = mPriceEditText.getText().toString().trim();
         String quantityString = mQuantityEditText.getText().toString().trim();
         String supplierNameString = mSupplierNameEditText.getText().toString().trim();
-        String supplierPhoneString= mSupplierPhoneNumberNameEditText.getText().toString().trim();
+        supplierPhoneString= mSupplierPhoneNumberNameEditText.getText().toString().trim();
 
         // Check if this is supposed to be a new book
         // and check if all the fields in the edit fields are blank
@@ -365,5 +382,20 @@ public class EditActivity extends AppCompatActivity implements LoaderManager.Loa
 
         // Show dialog that there are unsaved changes
         showUnsavedChangesDialog(discardButtonClickListener);
+    }
+
+    private void intentCall() {
+        supplierPhoneString= mSupplierPhoneNumberNameEditText.getText().toString().trim();
+
+        Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + supplierPhoneString));
+        if (intent.resolveActivity(getPackageManager()) != null) {
+            if (ActivityCompat.checkSelfPermission(EditActivity.this,
+                    Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
+                ActivityCompat.requestPermissions(this, new String[] {
+                        Manifest.permission.CALL_PHONE
+                }, 0);
+            }
+            startActivity(intent);
+        }
     }
 }
