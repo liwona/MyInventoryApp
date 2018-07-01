@@ -93,7 +93,9 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         // User clicked on a menu option in the app bar overflow menu
         switch (item.getItemId()) {
             case R.id.insert_new_book:
-                // Do nothing for now
+                // Open EditActivity to insert New Book
+                Intent intent = new Intent(MainActivity.this, EditActivity.class);
+                startActivity(intent);
                 return true;
             // Respond to a click on the "Insert dummy book" menu option
             case R.id.insert_dummy_book:
