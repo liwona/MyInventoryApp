@@ -8,7 +8,7 @@
     <string name="name_required">Book requires a name</string>string>
 
     <!--Toast message that price is required -->
-    <string name="price_required">Book requires a price</string>string>
+    <string name="price_required">Book requires a price greater than 0</string>string>
 
     <!--Toast message that quantity is required -->
     <string name="quantity_required">Book requires a quantity</string>string>
@@ -17,7 +17,7 @@
     <string name="supplier_name_required">Supplier name is required</string>string>
 
     <!--Toast message that supplier phone number is required -->
-    <string name="supplier_phone_required">Supplier phone number is required</string>
+    <string name="supplier_phone_required">9 digits supplier phone number is required</string>
 
     <!--Menu Option 1 -->
     <string name="insert_dummy_book">Add Dummy Product</string>
@@ -64,4 +64,19 @@
 
     <!-- Label for edit menu option to save book and leave editor [CHAR LIMIT=20] -->
     <string name="save">Save</string>
+
+    <!-- Toast message in editor when new book has been successfully inserted [CHAR LIMIT=NONE] -->
+    <string name="edit_insert_successful">Book is saved</string>
+
+    <!-- Toast message in editor when new book has failed to be inserted [CHAR LIMIT=NONE] -->
+    <string name="edit_insert_failed">Error with saving the book</string>
+
+    <!-- Toast message in editor when current book was successfully updated [CHAR LIMIT=NONE] -->
+    <string name="edit_update_successful">Book is updated</string>
+
+    <!-- Toast message in editor when current book has failed to be updated [CHAR LIMIT=NONE] -->
+    <string name="edit_update_failed">Error with updating the book</string>
+
+    <!-- Toast message in editor when no values inserted [CHAR LIMIT=NONE] -->
+    <string name="edit_add_values">Please add value for all of the fields</string>
 </resources>

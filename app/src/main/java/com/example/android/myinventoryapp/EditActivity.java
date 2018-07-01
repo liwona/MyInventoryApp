@@ -1,6 +1,7 @@
 package com.example.android.myinventoryapp;
 
 import android.app.LoaderManager;
+import android.content.ContentValues;
 import android.content.CursorLoader;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -10,11 +11,13 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.NavUtils;
 import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.example.android.myinventoryapp.data.InventoryContract.InventoryEntry;
 
@@ -72,7 +75,7 @@ public class EditActivity extends AppCompatActivity implements LoaderManager.Loa
             setTitle(getString(R.string.edit_activity_title_new_book));
 
 //            // Invalidate the options menu, so the "Delete" menu option can be hidden.
-//            // (It doesn't make sense to delete a pet that hasn't been created yet.)
+//            // (It doesn't make sense to delete a book that hasn't been created yet.)
             invalidateOptionsMenu();
         } else {
             // Otherwise this is an existing pet, so change app bar to say "Edit Pet"
@@ -187,9 +190,13 @@ public class EditActivity extends AppCompatActivity implements LoaderManager.Loa
         switch (item.getItemId()) {
             // Respond to a click on the "Save" menu option
             case R.id.save:
-                // Save pet to database
-                saveBook();
-                // Exit activity and jump back yo CatalogActivity
+                // Save book to database
+                if (saveBook() == 0){
+                    return false;
+                }
+                Toast.makeText(this, getString(R.string.edit_update_successful),
+                        Toast.LENGTH_SHORT).show();
+                // Exit activity and jump back to MainActivity
                 finish();
                 return true;
             // Respond to a click on the "Delete" menu option
@@ -199,12 +206,8 @@ public class EditActivity extends AppCompatActivity implements LoaderManager.Loa
                 return true;
             // Respond to a click on the "Up" arrow button in the app bar
             case android.R.id.home:
-//                // Navigate back to parent activity (CatalogActivity)
-//                NavUtils.navigateUpFromSameTask(this);
-//                return true;
-
-                // If the pet hasn't changed, continue with navigating up to parent activity
-                // which is the {@link CatalogActivity}.
+                // If the book hasn't changed, continue with navigating up to parent activity
+                // which is the {@link MainActivity}.
                 if (!mBookHasChanged) {
                     NavUtils.navigateUpFromSameTask(EditActivity.this);
                     return true;
@@ -229,7 +232,62 @@ public class EditActivity extends AppCompatActivity implements LoaderManager.Loa
         return super.onOptionsItemSelected(item);
     }
 
-    private void saveBook() {
+    private int saveBook() {
+        // Read from input fields
+        // Use trim to eliminate leading or trailing white space
+        String titleString = mTitleEditText.getText().toString().trim();
+        String priceString = mPriceEditText.getText().toString().trim();
+        String quantityString = mQuantityEditText.getText().toString().trim();
+        String supplierNameString = mSupplierNameEditText.getText().toString().trim();
+        String supplierPhoneString= mSupplierPhoneNumberNameEditText.getText().toString().trim();
+
+        // Check if this is supposed to be a new book
+        // and check if all the fields in the edit fields are blank
+        if (mCurrentBookUri == null &&
+                TextUtils.isEmpty(titleString) && TextUtils.isEmpty(priceString) &&
+                TextUtils.isEmpty(quantityString) && TextUtils.isEmpty(supplierNameString) &&
+                TextUtils.isEmpty(supplierPhoneString)) {
+            // Toast message
+            Toast.makeText(this, getString(R.string.edit_add_values),
+                    Toast.LENGTH_SHORT).show();
+            // Since no fields were modified, we can return early without creating a new book.
+            // No need to create ContentValues and no need to do any ContentProvider operations.
+            return 0;
+        }
+
+        // Creating a ContentValues object where column names are the keys,
+        // and book's attributes are the values.
+        ContentValues values = new ContentValues();
+        values.put(InventoryEntry.COLUMN_BOOK_TITLE,titleString );
+        values.put(InventoryEntry.COLUMN_BOOK_PRICE, priceString);
+        values.put(InventoryEntry.COLUMN_BOOK_QUANTITY, quantityString);
+        values.put(InventoryEntry.COLUMN_BOOK_SUPPLIER_NAME, supplierNameString);
+        values.put(InventoryEntry.COLUMN_BOOK_SUPPLIER_PHONE, supplierPhoneString);
+
+        // Determining if this is a new or existing book by checking if mCurrentBookUri is null or not
+        if (mCurrentBookUri == null)  {
+            // Insert a new pet into the provider, returning the content URI for the new pet.
+            Uri newUri = getContentResolver().insert(InventoryEntry.CONTENT_URI, values);
+
+            // Show a toast message depending on whether or not the insertion was successful
+            if (newUri == null){
+                // If the new content URI is null, then there was an error with insertion.
+
+            } else {
+                Toast.makeText(this, getString(R.string.edit_insert_successful),
+                        Toast.LENGTH_LONG).show();
+                return 1;
+            }
+        } else {
+            // Otherwise this is an EXISTING book, so update the book with content URI: mCurrentBookUri
+            // and pass in the new ContentValues. Pass in null for the selection and selection args
+            // because mCurrentBookUri will already identify the correct row in the database that
+            // we want to modify.
+            int rowsAffected = getContentResolver().update(mCurrentBookUri, values, null,
+                    null);
+
+            return rowsAffected;
+        } return 0;
     }
 
 

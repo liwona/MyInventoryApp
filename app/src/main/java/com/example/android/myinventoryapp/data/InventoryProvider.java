@@ -127,34 +127,52 @@ public class InventoryProvider extends ContentProvider {
         // Check that the name is not null
         String name = values.getAsString(InventoryEntry.COLUMN_BOOK_TITLE);
         if (TextUtils.isEmpty(name)) {
-            Toast.makeText(getContext(), getContext().getResources().getString(R.string.name_required), Toast.LENGTH_SHORT).show();
-//            throw new IllegalArgumentException("Book requires a name");
+            Toast.makeText(getContext(), getContext().getResources().getString(R.string.
+                    name_required), Toast.LENGTH_SHORT).show();
+            return null;
         }
 
         // Check that the price is provided and greater than 0
         Integer price = values.getAsInteger(InventoryEntry.COLUMN_BOOK_PRICE);
-        if (price == null && price < 0) {
-            Toast.makeText(getContext(), getContext().getResources().getString(R.string.price_required), Toast.LENGTH_SHORT).show();
-//            throw new IllegalArgumentException("Book requires a price");
+        if (price == null || price < 0) {
+            Toast.makeText(getContext(), getContext().getResources().getString(R.string.
+                    price_required), Toast.LENGTH_SHORT).show();
+            return null;
         }
 
         // Check that the quantity is provided and greater than or equal to 0
         Integer quantity = values.getAsInteger(InventoryEntry.COLUMN_BOOK_QUANTITY);
-        if (quantity != null && quantity <= 0) {
-            Toast.makeText(getContext(), getContext().getResources().getString(R.string.quantity_required), Toast.LENGTH_SHORT).show();
-//            throw new IllegalArgumentException("Book requires a quantity");
+        if (quantity == null || quantity < 0) {
+            Toast.makeText(getContext(), getContext().getResources().getString(R.string.
+                    quantity_required), Toast.LENGTH_SHORT).show();
+            return null;
+        }
+
+        // Check that the supplier name is provided
+        String supplierName = values.getAsString(InventoryEntry.COLUMN_BOOK_SUPPLIER_NAME);
+        if (supplierName.isEmpty()) {
+            Toast.makeText(getContext(), getContext().getResources().getString(R.string.
+                    supplier_name_required), Toast.LENGTH_SHORT).show();
+            return null;
         }
 
 
-//        // Check that the quantity is provided and greater than or equal to 0
-//        Integer supplier_phone_number = values.getAsInteger(InventoryEntry.COLUMN_BOOK_SUPPLIER_PHONE);
-//        if (supplier_phone_number != null && supplier_phone_number > 999999) {
-//            Toast.makeText(getContext(), getContext().getResources().getString(R.string.supplier_phone_required), Toast.LENGTH_SHORT).show();
-////            throw new IllegalArgumentException("Book requires a quantity");
-//        }
+        // Check that the quantity is provided and greater than or equal to 0
+        String phoneNumber = values.getAsString(InventoryEntry.COLUMN_BOOK_SUPPLIER_PHONE);
+        Integer supplier_phone_number;
+        if (phoneNumber.isEmpty()) {
+            supplier_phone_number = 0;
+        } else {
+            supplier_phone_number = values.getAsInteger(InventoryEntry.
+                    COLUMN_BOOK_SUPPLIER_PHONE);
+        }
 
-        // No need to check the breed, any value is valid (including null).
-
+        if (supplier_phone_number == null || !(supplier_phone_number > 99999999 &&
+                supplier_phone_number < 1000000000)) {
+            Toast.makeText(getContext(), getContext().getResources().getString(R.string.
+                    supplier_phone_required), Toast.LENGTH_SHORT).show();
+            return null;
+        }
 
         // Get writable database
         SQLiteDatabase database = mDbHelper.getWritableDatabase();
@@ -182,8 +200,110 @@ public class InventoryProvider extends ContentProvider {
     }
 
     @Override
-    public int update(Uri uri, ContentValues values, String selection, String[] selectionArgs) {
-        return 0;
+    public int update(Uri uri, ContentValues contentValues, String selection, String[] selectionArgs) {
+        final int match = sUriMatcher.match(uri);
+        switch (match) {
+            case BOOKS:
+                return updateBook(uri, contentValues, selection, selectionArgs);
+            case BOOK_ID:
+                // For the PET_ID code, extract out the ID from the URI,
+                // so we know which row to update. Selection will be "_id=?" and selection
+                // arguments will be a String array containing the actual ID.
+                selection = InventoryEntry._ID + "=?";
+                selectionArgs = new String[]{String.valueOf(ContentUris.parseId(uri))};
+                return updateBook(uri, contentValues, selection, selectionArgs);
+            default:
+                throw new IllegalArgumentException("Update is not supported for " + uri);
+        }
+    }
+
+    private int updateBook(Uri uri, ContentValues contentValues, String selection, String[] selectionArgs) {
+        // If the {@link Inventory#COLUMN_BOOK_TITLE} key is present,
+        // check that the name value is not null.
+        if (contentValues.containsKey(InventoryEntry.COLUMN_BOOK_TITLE)) {
+            String title = contentValues.getAsString(InventoryEntry.COLUMN_BOOK_TITLE);
+            if (title.isEmpty()) {
+                Toast.makeText(getContext(), getContext().getResources().getString(R.string.name_required),
+                        Toast.LENGTH_SHORT).show();
+                return 0;
+//                throw new IllegalArgumentException("Book requires a name");
+            }
+        }
+
+        // If the {@link Inventory#COLUMN_BOOK_PRICE} key is present,
+        // check that the name value is not null.
+        if (contentValues.containsKey(InventoryEntry.COLUMN_BOOK_PRICE)) {
+            // Check that the price is greater than or equal to 0
+            Integer price = contentValues.getAsInteger(InventoryEntry.COLUMN_BOOK_PRICE);
+            if (price == null || price <= 0) {
+                Toast.makeText(getContext(), getContext().getResources().getString(R.string.
+                        price_required), Toast.LENGTH_SHORT).show();
+                return 0;
+            }
+        }
+
+        // If the {@link Inventory#COLUMN_BOOK_QUANTITY} key is present,
+        // check that the name value is not null.
+        if (contentValues.containsKey(InventoryEntry.COLUMN_BOOK_QUANTITY)) {
+            // Check that the quantity is greater than or equal to 0
+            Integer quantity = contentValues.getAsInteger(InventoryEntry.COLUMN_BOOK_QUANTITY);
+            if (quantity == null || quantity < 0) {
+                Toast.makeText(getContext(), getContext().getResources().getString(R.string.
+                        quantity_required), Toast.LENGTH_SHORT).show();
+                return 0;
+            }
+        }
+
+        // If the {@link Inventory#COLUMN_BOOK_SUPPLIER_NAME} key is present,
+        // check that the name value is not null.
+        if (contentValues.containsKey(InventoryEntry.COLUMN_BOOK_SUPPLIER_NAME)) {
+            // Check that the quantity is greater than or equal to 0
+            String supplierName = contentValues.getAsString(InventoryEntry.COLUMN_BOOK_SUPPLIER_NAME);
+            if (supplierName.isEmpty()) {
+                Toast.makeText(getContext(), getContext().getResources().getString(R.string.
+                        supplier_name_required), Toast.LENGTH_SHORT).show();
+                return 0;
+            }
+        }
+
+        // Check that the quantity is provided and greater than or equal to 0
+        String phoneNumber = contentValues.getAsString(InventoryEntry.COLUMN_BOOK_SUPPLIER_PHONE);
+        Integer supplier_phone_number;
+        if (phoneNumber.isEmpty()) {
+            supplier_phone_number = 0;
+        } else {
+            supplier_phone_number = contentValues.getAsInteger(InventoryEntry.
+                    COLUMN_BOOK_SUPPLIER_PHONE);
+        }
+
+        if (supplier_phone_number == null || !(supplier_phone_number > 99999999 &&
+                supplier_phone_number < 1000000000)) {
+            Toast.makeText(getContext(), getContext().getResources().getString(R.string.
+                    supplier_phone_required), Toast.LENGTH_SHORT).show();
+            return 0;
+        }
+
+        // If there are no values to update, then don't try to update the database
+        if (contentValues.size() == 0) {
+            return 0;
+        }
+
+        // If some or the fields are empty return or wrong, return earlier
+
+        SQLiteDatabase database = mDbHelper.getWritableDatabase();
+
+        // Perform the update on the database and get the number of rows affected
+        int rowsUpdated = database.update(InventoryEntry.TABLE_NAME, contentValues, selection,
+                selectionArgs);
+
+        // If 1 or more rows were updated, then notify all listeners that the data at the
+        // given URI has changed
+        if (rowsUpdated != 0) {
+            getContext().getContentResolver().notifyChange(uri, null);
+        }
+
+        // Return the number of rows updated
+        return rowsUpdated;
     }
 
     @Override
