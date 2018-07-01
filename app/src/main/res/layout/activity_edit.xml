@@ -36,7 +36,7 @@
 
                 <!-- Price -->
                 <EditText
-                    android:id="@+id/edit_pet_weight"
+                    android:id="@+id/edit_price"
                     style="@style/EditStyle"
                     android:hint="@string/hint_book_price"
                     android:inputType="number" />

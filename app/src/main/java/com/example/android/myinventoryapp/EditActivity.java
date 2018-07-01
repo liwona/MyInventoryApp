@@ -1,6 +1,7 @@
 package com.example.android.myinventoryapp;
 
 import android.app.LoaderManager;
+import android.content.CursorLoader;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.Loader;
@@ -14,6 +15,8 @@ import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.EditText;
+
+import com.example.android.myinventoryapp.data.InventoryContract.InventoryEntry;
 
 public class EditActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor> {
 
@@ -82,7 +85,7 @@ public class EditActivity extends AppCompatActivity implements LoaderManager.Loa
 
         // Find all relevant views that we will need to read user input from
         mTitleEditText = (EditText) findViewById(R.id.edit_book_title);
-        mPriceEditText = (EditText) findViewById(R.id.edit_book_title);
+        mPriceEditText = (EditText) findViewById(R.id.edit_price);
         mQuantityEditText = (EditText) findViewById(R.id.edit_book_quantity);
         mSupplierNameEditText = (EditText) findViewById(R.id.edit_supplier_name);
         mSupplierPhoneNumberNameEditText= (EditText) findViewById(R.id.edit_supplier_number);
@@ -99,17 +102,64 @@ public class EditActivity extends AppCompatActivity implements LoaderManager.Loa
 
     @Override
     public Loader<Cursor> onCreateLoader(int id, Bundle args) {
-        return null;
+        // Since the editor shows all pet attributes, define a projection that contains
+        // all columns from the pet table
+        String[] projection = {
+                InventoryEntry._ID,
+                InventoryEntry.COLUMN_BOOK_TITLE,
+                InventoryEntry.COLUMN_BOOK_PRICE,
+                InventoryEntry.COLUMN_BOOK_QUANTITY,
+                InventoryEntry.COLUMN_BOOK_SUPPLIER_NAME,
+                InventoryEntry.COLUMN_BOOK_SUPPLIER_PHONE
+        };
+
+        // This Loader will execute the ContentProvider's query method on a background thread
+        return new CursorLoader(this,   // Parent activity context
+                mCurrentBookUri,        // Table to query
+                projection,     // Projection to return
+                null,            // No selection clause
+                null,            // No selection arguments
+                null             // Default sort order
+        );
     }
 
     @Override
-    public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
+    public void onLoadFinished(Loader<Cursor> loader, Cursor cursor) {
+        // Proceed with moving to the first row of the cursor and reading data from it
+        // (This should be the only row in the cursor)
+        if (cursor.moveToFirst()) {
+            // Find the columns of pet attributes that we're interested in
+            int titleColumnIndex = cursor.getColumnIndex(InventoryEntry.COLUMN_BOOK_TITLE);
+            int priceColumnIndex = cursor.getColumnIndex(InventoryEntry.COLUMN_BOOK_PRICE);
+            int quantityColumnIndex = cursor.getColumnIndex(InventoryEntry.COLUMN_BOOK_QUANTITY);
+            int supplierNameColumnIndex = cursor.getColumnIndex(InventoryEntry.COLUMN_BOOK_SUPPLIER_NAME);
+            int supplierPhoneColumnIndex = cursor.getColumnIndex(InventoryEntry.COLUMN_BOOK_SUPPLIER_PHONE);
 
+            // Extract out the value from the Cursor for the given column index
+            String title = cursor.getString(titleColumnIndex);
+            int price = cursor.getInt(priceColumnIndex);
+            int quantity = cursor.getInt(quantityColumnIndex);
+            String supplierName = cursor.getString(supplierNameColumnIndex);
+            int supplierPhone = cursor.getInt(supplierPhoneColumnIndex);
+
+
+            // Update the views on the screen with the values from the database
+            mTitleEditText.setText(title);
+            mPriceEditText.setText(Integer.toString(price));
+            mQuantityEditText.setText(Integer.toString(quantity));
+            mSupplierNameEditText.setText(supplierName);
+            mSupplierPhoneNumberNameEditText.setText(Integer.toString(supplierPhone));
+        }
     }
 
     @Override
     public void onLoaderReset(Loader<Cursor> loader) {
-
+        // If the loader is invalidated, clear out all the data from the input fields.
+        mTitleEditText.setText("");
+        mPriceEditText.setText("");
+        mQuantityEditText.setText("");
+        mSupplierNameEditText.setText("");
+        mSupplierPhoneNumberNameEditText.setText("");
     }
 
     @Override
