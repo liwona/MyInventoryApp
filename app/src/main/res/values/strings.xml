@@ -79,4 +79,10 @@
 
     <!-- Toast message in editor when no values inserted [CHAR LIMIT=NONE] -->
     <string name="edit_add_values">Please add value for all of the fields</string>
+
+    <!-- Toast message in editor when current pet was successfully deleted [CHAR LIMIT=NONE] -->
+    <string name="edit_delete_successful">Book is deleted</string>
+
+    <!-- Toast message in editor when current pet has failed to be deleted [CHAR LIMIT=NONE] -->
+    <string name="edit_delete_failed">Error with deleting the book</string>
 </resources>
