@@ -16,7 +16,7 @@
         <TextView
             android:id="@+id/title_edit_fragment"
             style="@style/CategoryStyle"
-            android:text="@string/overview" />
+            android:text="@string/edit_view_title" />
 
         <!-- Input fields -->
         <LinearLayout

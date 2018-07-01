@@ -57,6 +57,11 @@
 
     <!-- Text hint for price in the edit activity [CHAR LIMIT=30] -->
     <string name="hint_supplier_number">Supplier\'s Phone Number</string>
-    <string name="overview">Book\'s details</string>
+
+
+    <string name="edit_view_title">Book\'s details</string>
     <string name="currency">$</string>
+
+    <!-- Label for edit menu option to save book and leave editor [CHAR LIMIT=20] -->
+    <string name="save">Save</string>
 </resources>
