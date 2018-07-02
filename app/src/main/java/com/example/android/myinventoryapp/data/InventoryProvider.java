@@ -299,22 +299,23 @@ public class InventoryProvider extends ContentProvider {
                 return 0;
             }
         }
+        if (contentValues.containsKey(InventoryEntry.COLUMN_BOOK_SUPPLIER_PHONE)) {
+            // Check that the quantity is provided and greater than or equal to 0
+            String phoneNumber = contentValues.getAsString(InventoryEntry.COLUMN_BOOK_SUPPLIER_PHONE);
+            Integer supplier_phone_number;
+            if (phoneNumber.isEmpty()) {
+                supplier_phone_number = 0;
+            } else {
+                supplier_phone_number = contentValues.getAsInteger(InventoryEntry.
+                        COLUMN_BOOK_SUPPLIER_PHONE);
+            }
 
-        // Check that the quantity is provided and greater than or equal to 0
-        String phoneNumber = contentValues.getAsString(InventoryEntry.COLUMN_BOOK_SUPPLIER_PHONE);
-        Integer supplier_phone_number;
-        if (phoneNumber.isEmpty()) {
-            supplier_phone_number = 0;
-        } else {
-            supplier_phone_number = contentValues.getAsInteger(InventoryEntry.
-                    COLUMN_BOOK_SUPPLIER_PHONE);
-        }
-
-        if (supplier_phone_number == null || !(supplier_phone_number > 99999999 &&
-                supplier_phone_number < 1000000000)) {
-            Toast.makeText(getContext(), getContext().getResources().getString(R.string.
-                    supplier_phone_required), Toast.LENGTH_SHORT).show();
-            return 0;
+            if (supplier_phone_number == null || !(supplier_phone_number > 99999999 &&
+                    supplier_phone_number < 1000000000)) {
+                Toast.makeText(getContext(), getContext().getResources().getString(R.string.
+                        supplier_phone_required), Toast.LENGTH_SHORT).show();
+                return 0;
+            }
         }
 
         // If there are no values to update, then don't try to update the database

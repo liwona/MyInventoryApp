@@ -1,11 +1,15 @@
 package com.example.android.myinventoryapp;
 
 
+import android.content.ContentUris;
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.CursorAdapter;
 import android.widget.TextView;
 
@@ -54,9 +58,10 @@ public class InventoryCursorAdapter extends CursorAdapter {
     @Override
     public void bindView(View view, Context context, Cursor cursor) {
         // Find fields to populate in inflated template
+        final int rowId = cursor.getInt(cursor.getColumnIndex(InventoryEntry._ID));
         TextView nameTextVIew = view.findViewById(R.id.name);
         TextView priceTextView = view.findViewById(R.id.price);
-        TextView quantityTextView = view.findViewById(R.id.quantity);
+        final TextView quantityTextView = view.findViewById(R.id.quantity);
 
         // Find the columns of the book attributes that we're interested in
         int nameColumnIndex = cursor.getColumnIndex(InventoryEntry.COLUMN_BOOK_TITLE);
@@ -72,5 +77,31 @@ public class InventoryCursorAdapter extends CursorAdapter {
         nameTextVIew.setText(bookName);
         priceTextView.setText(bookPrice);
         quantityTextView.setText(bookQuantity);
+
+        Button decrement = (Button) view.findViewById(R.id.minus_button);
+        decrement.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String quantityString = quantityTextView.getText().toString().trim();
+                int quantity = Integer.parseInt(quantityString);
+                quantity = quantity - 1;
+                if (quantity < 0) {
+                    // Show an error message on toast
+//                    Toast.makeText(MainActivity.this, context.getString(R.string.quantity_limitation), Toast.LENGTH_SHORT ).show();
+                    // Exit this method early because no possible to order less cups of coffee
+                    return;
+                }
+
+                quantityTextView.setText(Integer.toString(quantity));
+                // Creating a ContentValues object where column names are the keys,
+                // and book's attributes are the values.
+                ContentValues values = new ContentValues();
+                values.put(InventoryEntry.COLUMN_BOOK_QUANTITY, Integer.toString(quantity));
+
+                Uri currentBookUri = ContentUris.withAppendedId(InventoryEntry.CONTENT_URI, rowId);
+                v.getContext().getContentResolver().update(currentBookUri, values, null,
+                        null);
+            }
+        });
     }
 }

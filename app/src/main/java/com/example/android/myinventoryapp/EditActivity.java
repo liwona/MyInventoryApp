@@ -49,6 +49,9 @@ public class EditActivity extends AppCompatActivity implements LoaderManager.Loa
     /** String which contains Supplier Phone Number*/
     private String supplierPhoneString;
 
+    /** String which contains Quantity*/
+    private String quantityString;
+
     /** Content URI for the existing book (null if it's a new book) */
     private Uri mCurrentBookUri;
 
@@ -119,6 +122,44 @@ public class EditActivity extends AppCompatActivity implements LoaderManager.Loa
                 intentCall();
             }
         });
+
+        Button decrement = findViewById(R.id.decrement);
+        decrement.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                decrement();
+            }
+        });
+
+        Button increment = findViewById(R.id.increment);
+        increment.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                increment();
+            }
+        });
+    }
+
+    private void increment() {
+        quantityString = mQuantityEditText.getText().toString().trim();
+        int quantity = Integer.parseInt(quantityString);
+
+        quantity = quantity + 1;
+        mQuantityEditText.setText(Integer.toString(quantity));
+    }
+
+    private void decrement() {
+        quantityString = mQuantityEditText.getText().toString().trim();
+        int quantity = Integer.parseInt(quantityString);
+
+        if (quantity < 0) {
+            // Show an error message on toast
+            Toast.makeText(this, getString(R.string.quantity_limitation), Toast.LENGTH_SHORT ).show();
+            // Exit this method early because no possible to order less cups of coffee
+            return;
+        }
+        quantity = quantity - 1;
+        mQuantityEditText.setText(Integer.toString(quantity));
     }
 
     @Override
@@ -255,7 +296,7 @@ public class EditActivity extends AppCompatActivity implements LoaderManager.Loa
         // Use trim to eliminate leading or trailing white space
         String titleString = mTitleEditText.getText().toString().trim();
         String priceString = mPriceEditText.getText().toString().trim();
-        String quantityString = mQuantityEditText.getText().toString().trim();
+        quantityString = mQuantityEditText.getText().toString().trim();
         String supplierNameString = mSupplierNameEditText.getText().toString().trim();
         supplierPhoneString= mSupplierPhoneNumberNameEditText.getText().toString().trim();
 

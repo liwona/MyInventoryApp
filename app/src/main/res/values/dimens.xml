@@ -7,4 +7,7 @@
     <!-- Margin for ListView-->
     <dimen name="layout_margin">16dp</dimen>
 
+    <!-- Margin for Buttons-->
+    <dimen name="buttons_margin">8dp</dimen>
+
 </resources>

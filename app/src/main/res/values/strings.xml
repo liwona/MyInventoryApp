@@ -88,4 +88,6 @@
 
     <!-- Button to Order-->
     <string name="order_button">Order</string>
+    <string name="quantity_category">Quantity</string>
+    <string name="quantity_limitation">You can\'t set the quantity to less than 0</string>
 </resources>

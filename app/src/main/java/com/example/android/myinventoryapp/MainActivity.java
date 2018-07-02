@@ -77,7 +77,6 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
 
 //        // Kick off the loader
         getLoaderManager().initLoader(PET_LOADER, null, this);
-
     }
 
     @Override
