@@ -44,7 +44,8 @@
             <!-- Currency -->
             <TextView
                 android:id="@+id/label_price_currency"
-                style="@style/EditCurrency" />
+                style="@style/EditCurrency"
+                android:layout_toRightOf="@id/edit_price"/>
 
         </RelativeLayout>
 
@@ -83,6 +84,13 @@
                 android:text="+"/>
 
         </LinearLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/supplier_category"
+            android:id="@+id/supplier_category"
+            style="@style/CategoryStyle"/>
 
         <!-- Supplier Name-->
         <EditText
