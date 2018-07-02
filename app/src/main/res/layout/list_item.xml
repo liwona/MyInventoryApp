@@ -2,7 +2,8 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:background="@color/background_color">
 
     <TextView
         android:id="@+id/name"
@@ -12,7 +13,7 @@
         android:layout_marginTop="@dimen/layout_margin"
         android:layout_marginLeft="@dimen/layout_margin"
         android:textAppearance="?android:textAppearanceMedium"
-        android:textColor="#2B3D4D"
+        android:textColor="@color/values_color"
         tools:text="Notebook"/>
 
     <LinearLayout
@@ -34,7 +35,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="sans-serif"
             android:textAppearance="?android:textAppearanceMedium"
-            android:textColor="#9E969D"
+            android:textColor="@color/values_color"
             tools:text="5$"/>
     </LinearLayout>
 
@@ -51,7 +52,7 @@
             android:layout_height="wrap_content"
             android:background="@color/button_color"
             android:textAppearance="?android:textAppearanceSmall"
-            android:textColor="#2B3D4D"
+            android:textColor="@color/values_color"
             android:layout_margin="@dimen/buttons_margin"
             android:drawableStart="@drawable/ic_decrease"
             android:drawableLeft="@drawable/ic_decrease"
@@ -74,7 +75,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="sans-serif-medium"
             android:textAppearance="?android:textAppearanceMedium"
-            android:textColor="#9E969D"
+            android:textColor="@color/values_color"
             android:layout_marginLeft="@dimen/layout_margin"
             android:layout_toRightOf="@+id/sale_button"
             android:layout_below="@+id/hint_book_quantity"
