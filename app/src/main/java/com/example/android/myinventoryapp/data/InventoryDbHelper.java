@@ -30,7 +30,7 @@ public class InventoryDbHelper extends SQLiteOpenHelper {
                 + InventoryContract.InventoryEntry._ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
                 + InventoryContract.InventoryEntry.COLUMN_BOOK_TITLE + " TEXT NOT NULL, "
                 + InventoryContract.InventoryEntry.COLUMN_BOOK_PRICE + " INTEGER NOT NULL, "
-                + InventoryContract.InventoryEntry.COLUMN_BOOK_QUANTITY + " INTEGER NOT NULL, "
+                + InventoryContract.InventoryEntry.COLUMN_BOOK_QUANTITY + " INTEGER NOT NULL DEFAULT 0, "
                 + InventoryContract.InventoryEntry.COLUMN_BOOK_SUPPLIER_NAME + " TEXT, "
                 + InventoryContract.InventoryEntry.COLUMN_BOOK_SUPPLIER_PHONE + " INTEGER" + ");";
         // Execute the SQL statement

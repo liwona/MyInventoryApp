@@ -95,6 +95,10 @@ public class EditActivity extends AppCompatActivity implements LoaderManager.Loa
             // This is a new pet, so change the app bar to say "Add a Pet"
             setTitle(getString(R.string.edit_activity_title_new_book));
 
+            // Disabled Order Button
+            mOrderBook = findViewById(R.id.order_button);
+            mOrderBook.setVisibility(View.GONE);
+
 //            // Invalidate the options menu, so the "Delete" menu option can be hidden.
 //            // (It doesn't make sense to delete a book that hasn't been created yet.)
             invalidateOptionsMenu();
@@ -156,6 +160,11 @@ public class EditActivity extends AppCompatActivity implements LoaderManager.Loa
 
     private void increment() {
         quantityString = mQuantityEditText.getText().toString().trim();
+
+        if (quantityString.isEmpty()){
+            quantityString = "0";
+        }
+
         int quantity = Integer.parseInt(quantityString);
 
         quantity = quantity + 1;
@@ -164,9 +173,13 @@ public class EditActivity extends AppCompatActivity implements LoaderManager.Loa
 
     private void decrement() {
         quantityString = mQuantityEditText.getText().toString().trim();
+        if (quantityString.isEmpty()){
+            quantityString = "0";
+        }
+
         int quantity = Integer.parseInt(quantityString);
 
-        if (quantity < 0) {
+        if (quantity <= 0) {
             // Show an error message on toast
             Toast.makeText(this, getString(R.string.quantity_limitation), Toast.LENGTH_SHORT ).show();
             // Exit this method early because no possible to order less cups of coffee
