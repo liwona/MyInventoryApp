@@ -90,4 +90,13 @@
     <string name="order_button">Order</string>
     <string name="quantity_category">Quantity</string>
     <string name="quantity_limitation">You can\'t set the quantity to less than 0</string>
+
+    <!-- Dialog message when user is leaving EditActivity but didn't save changes [CHAR LIMIT=NONE] -->
+    <string name="unsaved_changes_msg">Discard your changes and quit editing?</string>
+
+    <!-- Dialog button text for the option to discard a user's changes [CHAR LIMIT=20] -->
+    <string name="discard_changes">Discard</string>
+
+    <!-- Dialog button text for the option to keep editing the current book [CHAR LIMIT=20] -->
+    <string name="keep_editing_book">Keep Editing</string>
 </resources>
