@@ -10,4 +10,7 @@
     <!-- Margin for Buttons-->
     <dimen name="buttons_margin">8dp</dimen>
 
+    <!-- Padding for Empty View-->
+    <dimen name="padding_empty_view">30dp</dimen>
+
 </resources>
