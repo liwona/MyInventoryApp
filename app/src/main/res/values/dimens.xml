@@ -5,7 +5,7 @@
     <dimen name="fab_margin">20dp</dimen>
 
     <!-- Margin for ListView-->
-    <dimen name="layout_margin">16dp</dimen>
+    <dimen name="layout_margin">10dp</dimen>
 
     <!-- Margin for Buttons-->
     <dimen name="buttons_margin">8dp</dimen>

@@ -9,29 +9,32 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="sans-serif-medium"
+        android:layout_marginTop="@dimen/layout_margin"
+        android:layout_marginLeft="@dimen/layout_margin"
         android:textAppearance="?android:textAppearanceMedium"
         android:textColor="#2B3D4D"
         tools:text="Notebook"/>
 
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:padding="@dimen/layout_margin">
+        android:layout_marginLeft="@dimen/layout_margin"
+        android:layout_below="@id/name">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/layout_margin"
             android:text="@string/hint_book_price"/>
 
         <TextView
             android:id="@+id/price"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="0.5"
             android:fontFamily="sans-serif"
             android:textAppearance="?android:textAppearanceMedium"
-            android:textColor="#AEB6BD"
+            android:textColor="#9E969D"
             tools:text="5$"/>
     </LinearLayout>
 
@@ -62,6 +65,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/hint_book_quantity"
             android:text="@string/hint_book_quantity"
+            android:layout_marginTop="@dimen/layout_margin"
             android:layout_toRightOf="@+id/sale_button"/>
 
         <TextView
@@ -70,9 +74,10 @@
             android:layout_height="wrap_content"
             android:fontFamily="sans-serif-medium"
             android:textAppearance="?android:textAppearanceMedium"
-            android:textColor="#AEB6BD"
+            android:textColor="#9E969D"
+            android:layout_marginLeft="@dimen/layout_margin"
             android:layout_toRightOf="@+id/sale_button"
             android:layout_below="@+id/hint_book_quantity"
-            tools:text="5$"/>
+            tools:text="7"/>
     </RelativeLayout>
 </RelativeLayout>

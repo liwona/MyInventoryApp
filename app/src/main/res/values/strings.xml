@@ -47,7 +47,7 @@
     <string name="hint_book_title">Title</string>
 
     <!-- Text hint for price in the edit activity [CHAR LIMIT=30] -->
-    <string name="hint_book_price">Price</string>
+    <string name="hint_book_price">Price: </string>
 
     <!-- Text hint for quantity in the edit activity [CHAR LIMIT=30] -->
     <string name="hint_book_quantity">Quantity</string>
