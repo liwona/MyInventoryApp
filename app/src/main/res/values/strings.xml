@@ -99,4 +99,8 @@
 
     <!-- Dialog button text for the option to keep editing the current book [CHAR LIMIT=20] -->
     <string name="keep_editing_book">Keep Editing</string>
+
+    <string name="empty_view_text">No book is added to database. To insert a book click on the bottom
+        on the right corner of the screen or click Menu on the Top Bar. Please indicate all of
+        the fields. Otherwise the book won't be saved.</string>
 </resources>
