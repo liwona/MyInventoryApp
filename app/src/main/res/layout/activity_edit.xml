@@ -44,8 +44,8 @@
             <!-- Currency -->
             <TextView
                 android:id="@+id/label_price_currency"
-                style="@style/EditCurrency"
-                android:text="@string/currency" />
+                style="@style/EditCurrency" />
+
         </RelativeLayout>
 
         <!-- Quantity -->

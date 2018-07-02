@@ -22,9 +22,13 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.android.myinventoryapp.data.InventoryContract.InventoryEntry;
+
+import java.text.NumberFormat;
+import java.util.Currency;
 
 public class EditActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor> {
 
@@ -33,6 +37,9 @@ public class EditActivity extends AppCompatActivity implements LoaderManager.Loa
 
     /** EditText field to enter the book's price */
     private EditText mPriceEditText;
+
+    /** TextView field to enter Currency symbol */
+    private TextView mPriceCurencyTextView;
 
     /** EditText field to enter the quantity of the books */
     private EditText mQuantityEditText;
@@ -103,9 +110,11 @@ public class EditActivity extends AppCompatActivity implements LoaderManager.Loa
         // Find all relevant views that we will need to read user input from
         mTitleEditText = (EditText) findViewById(R.id.edit_book_title);
         mPriceEditText = (EditText) findViewById(R.id.edit_price);
+        mPriceCurencyTextView = (TextView) findViewById(R.id.label_price_currency);
         mQuantityEditText = (EditText) findViewById(R.id.edit_book_quantity);
         mSupplierNameEditText = (EditText) findViewById(R.id.edit_supplier_name);
         mSupplierPhoneNumberNameEditText= (EditText) findViewById(R.id.edit_supplier_number);
+
 
         // Setup OnTouchListeners on all the input fields, so we can determine if the user
         // has touched or modified them. This will let us know if there are unsaved changes
@@ -114,6 +123,11 @@ public class EditActivity extends AppCompatActivity implements LoaderManager.Loa
         mPriceEditText.setOnTouchListener(mTouchListener);
         mQuantityEditText.setOnTouchListener(mTouchListener);
         mSupplierNameEditText.setOnTouchListener(mTouchListener);
+
+        // Set Currency symbol to TextView
+        Currency currency = NumberFormat.getCurrencyInstance().getCurrency();
+        String symbol = currency.getSymbol();
+        mPriceCurencyTextView.setText(symbol);
 
         mOrderBook = findViewById(R.id.order_button);
         mOrderBook.setOnClickListener(new View.OnClickListener() {
