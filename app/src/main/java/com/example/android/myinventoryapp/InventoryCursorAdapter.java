@@ -15,6 +15,8 @@ import android.widget.TextView;
 
 import com.example.android.myinventoryapp.data.InventoryContract.InventoryEntry;
 
+import java.text.NumberFormat;
+
 /**
  * {@link InventoryCursorAdapter} is an adapter for a list or grid view
  * that uses a {@link Cursor} of pet data as its data source. This adapter knows
@@ -71,6 +73,7 @@ public class InventoryCursorAdapter extends CursorAdapter {
         // Read the book attributes from the Cursor for the current book
         String bookName = cursor.getString(nameColumnIndex);
         String bookPrice = cursor.getString(priceColumnIndex);
+        bookPrice = NumberFormat.getCurrencyInstance().format(Integer.parseInt(bookPrice));
         String bookQuantity = cursor.getString(quantityColumnIndex);
 
         // Populate fields with extracted properties
@@ -78,7 +81,7 @@ public class InventoryCursorAdapter extends CursorAdapter {
         priceTextView.setText(bookPrice);
         quantityTextView.setText(bookQuantity);
 
-        Button decrement = (Button) view.findViewById(R.id.minus_button);
+        Button decrement = (Button) view.findViewById(R.id.sale_button);
         decrement.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
