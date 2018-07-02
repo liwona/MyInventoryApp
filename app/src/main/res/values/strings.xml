@@ -105,4 +105,5 @@
         the fields. Otherwise the book won't be saved.</string>
     <string name="sale_button">Sale</string>
     <string name="supplier_category">Supplier\'s details</string>
+    <string name="incorrect_supplier_phone">Incorrect Supplier Phone Number</string>
 </resources>

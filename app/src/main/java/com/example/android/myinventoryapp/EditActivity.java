@@ -472,16 +472,22 @@ public class EditActivity extends AppCompatActivity implements LoaderManager.Loa
 
     private void intentCall() {
         supplierPhoneString= mSupplierPhoneNumberNameEditText.getText().toString().trim();
+        long supplierPhoneNumber = Long.parseLong(supplierPhoneString);
 
-        Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + supplierPhoneString));
-        if (intent.resolveActivity(getPackageManager()) != null) {
-            if (ActivityCompat.checkSelfPermission(EditActivity.this,
-                    Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
-                ActivityCompat.requestPermissions(this, new String[] {
-                        Manifest.permission.CALL_PHONE
-                }, 0);
+        if (supplierPhoneNumber < 100000000 || supplierPhoneNumber > 999999999){
+            Toast.makeText(this, getString(R.string.incorrect_supplier_phone),
+                    Toast.LENGTH_SHORT).show();
+        } else {
+            Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + supplierPhoneString));
+            if (intent.resolveActivity(getPackageManager()) != null) {
+                if (ActivityCompat.checkSelfPermission(EditActivity.this,
+                        Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
+                    ActivityCompat.requestPermissions(this, new String[] {
+                            Manifest.permission.CALL_PHONE
+                    }, 0);
+                }
+                startActivity(intent);
             }
-            startActivity(intent);
         }
     }
 }
